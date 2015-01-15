@@ -3,7 +3,7 @@ Imports System.IO
 Imports System.Net
 Imports System.Threading
 
-Public Class Form1
+Public Class MainForm
     Private FreedomURL As String = Nothing
 
     Public Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
