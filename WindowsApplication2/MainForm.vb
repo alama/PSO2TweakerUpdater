@@ -11,7 +11,7 @@ Public Class MainForm
     End Sub
 
     Private Sub client_DownloadStringCompleted(sender As Object, e As DownloadStringCompletedEventArgs) Handles Client.DownloadStringCompleted
-        FreedomURL = e.Result
+        FreedomURL = If(e.Result.Contains("freedom"), e.Result, "http://162.243.211.123/freedom/")
         Client.DownloadFileAsync(New Uri(FreedomURL & "PSO2%20Tweaker.exe"), (Application.StartupPath & "\PSO2 Tweaker.exe"))
     End Sub
 
