@@ -22,8 +22,10 @@ Partial Class Form1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.LabelX1 = New DevComponents.DotNetBar.LabelX()
         Me.ProgressBarX1 = New DevComponents.DotNetBar.Controls.ProgressBarX()
+        Me.Client = New System.Net.WebClient()
         Me.SuspendLayout()
         '
         'LabelX1
@@ -50,7 +52,17 @@ Partial Class Form1
         Me.ProgressBarX1.TabIndex = 1
         Me.ProgressBarX1.TextVisible = True
         '
-        'Form1
+        'Client
+        '
+        Me.Client.BaseAddress = ""
+        Me.Client.CachePolicy = Nothing
+        Me.Client.Credentials = Nothing
+        Me.Client.Encoding = CType(resources.GetObject("Client.Encoding"), System.Text.Encoding)
+        Me.Client.Headers = CType(resources.GetObject("Client.Headers"), System.Net.WebHeaderCollection)
+        Me.Client.QueryString = CType(resources.GetObject("Client.QueryString"), System.Collections.Specialized.NameValueCollection)
+        Me.Client.UseDefaultCredentials = False
+        '
+        'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -58,7 +70,7 @@ Partial Class Form1
         Me.Controls.Add(Me.ProgressBarX1)
         Me.Controls.Add(Me.LabelX1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
-        Me.Name = "Form1"
+        Me.Name = "MainForm"
         Me.Text = "PSO2 Tweaker Updater"
         Me.TopMost = True
         Me.ResumeLayout(False)
@@ -66,5 +78,6 @@ Partial Class Form1
     End Sub
     Friend WithEvents LabelX1 As DevComponents.DotNetBar.LabelX
     Friend WithEvents ProgressBarX1 As DevComponents.DotNetBar.Controls.ProgressBarX
+    Friend WithEvents Client As Net.WebClient
 
 End Class
