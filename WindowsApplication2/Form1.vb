@@ -2,6 +2,7 @@
 
 Public Class Form1
     Dim FreedomURL As String = "http://162.243.211.123/freedom/"
+
     Public Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Visible = True
         For Each p As Process In Process.GetProcesses
@@ -16,6 +17,7 @@ Public Class Form1
         t1.IsBackground = True
         t1.Start()
     End Sub
+
     Private Sub UpdateTime()
         Dim justice As New Net.WebClient
         FreedomURL = justice.DownloadString("http://arks-layer.com/freedom.txt")
@@ -32,11 +34,16 @@ Public Class Form1
         Process.Start("PSO2 Tweaker.exe")
         Application.Exit()
     End Sub
-    Private Sub client_ProgressChanged(sender As Object, e As Net.DownloadProgressChangedEventArgs)
-        Dim totalSize As Long = e.TotalBytesToReceive
-        Dim downloadedBytes As Long = e.BytesReceived
-        Dim percentage As Integer = e.ProgressPercentage
-        ProgressBarX1.Value = percentage
-        ProgressBarX1.Text = "Downloaded " & downloadedBytes & "/" & totalSize & " (" & percentage & "%)"
+
+    Private Sub client_ProgressChanged(sender As Object, e As DownloadProgressChangedEventArgs)
+        If ProgressBarX1.InvokeRequired Then
+            ProgressBarX1.Invoke(New Action(Of Object, DownloadProgressChangedEventArgs)(AddressOf client_ProgressChanged), sender, e)
+        Else
+            Dim totalSize As Long = e.TotalBytesToReceive
+            Dim downloadedBytes As Long = e.BytesReceived
+            Dim percentage As Integer = e.ProgressPercentage
+            ProgressBarX1.Value = percentage
+            ProgressBarX1.Text = "Downloaded " & downloadedBytes & "/" & totalSize & " (" & percentage & "%)"
+        End If
     End Sub
 End Class
