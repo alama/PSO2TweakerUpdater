@@ -30,11 +30,10 @@ Public Class MainForm
     Private Sub UpdateTime(state As Object)
         For Each procs As Process In Process.GetProcessesByName("PSO2 Tweaker")
             procs.Kill()
+            procs.WaitForExit(60000)
         Next
 
-        Thread.Sleep(1000)
         File.Delete("PSO2 Tweaker.exe")
-
         Me.Invoke(New Action(Of Uri)(AddressOf Client.DownloadStringAsync), New Uri("http://arks-layer.com/freedom.txt"))
     End Sub
 End Class
