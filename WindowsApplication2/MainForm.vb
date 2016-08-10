@@ -14,11 +14,12 @@ Public Class MainForm
     Private Sub client_DownloadStringCompleted(sender As Object, e As DownloadStringCompletedEventArgs) Handles Client.DownloadStringCompleted
         Dim TestURL As String = ""
         If RegKey.GetValue(Of Boolean)(RegKey.EnableBeta) = True Then
-            TestURL = Client.DownloadString("http://aida.moe/freedom/")
+            TestURL = "http://aida.moe/freedom/"
         Else
             TestURL = e.Result
         End If
         FreedomURL = If(TestURL.Contains("freedom"), TestURL, e.Result)
+        'MsgBox(FreedomURL)
         Client.DownloadFileAsync(New Uri(FreedomURL & "PSO2%20Tweaker.exe"), (Application.StartupPath & "\PSO2 Tweaker.exe"))
     End Sub
 
