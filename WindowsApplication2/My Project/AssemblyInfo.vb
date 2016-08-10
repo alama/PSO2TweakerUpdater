@@ -8,17 +8,17 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("WindowsApplication2")> 
-<Assembly: AssemblyDescription("")> 
-<Assembly: AssemblyCompany("")> 
-<Assembly: AssemblyProduct("WindowsApplication2")> 
-<Assembly: AssemblyCopyright("Copyright ©  2013")> 
-<Assembly: AssemblyTrademark("")> 
+<Assembly: AssemblyTitle("PSO2 Tweaker Updater")> 
+<Assembly: AssemblyDescription("Updates your PSO2 Tweaker!")> 
+<Assembly: AssemblyCompany("Arks-Layer")> 
+<Assembly: AssemblyProduct("PSO2 Tweaker Updater")> 
+<Assembly: AssemblyCopyright("Copyright ©  2015")> 
+<Assembly: AssemblyTrademark("Arks-Layer")> 
 
 <Assembly: ComVisible(False)>
 
 'The following GUID is for the ID of the typelib if this project is exposed to COM
-<Assembly: Guid("ede03911-1f23-4647-af03-623052fd4d2e")> 
+<Assembly: Guid("ede03911-1f23-4647-af03-623052fd4d2e")>
 
 ' Version information for an assembly consists of the following four values:
 '
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("1.0.0.4")> 
-<Assembly: AssemblyFileVersion("1.0.0.4")> 
+<Assembly: AssemblyVersion("1.0.0.5")>
+<Assembly: AssemblyFileVersion("1.0.0.5")>

@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2012 for Windows Desktop
+# Visual Studio Express 2013 for Windows Desktop
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "PSO2 Tweaker Updater", "WindowsApplication2\PSO2 Tweaker Updater.vbproj", "{1B3D3229-0855-42DC-AA7F-858E0506F946}"
 EndProject
 Global

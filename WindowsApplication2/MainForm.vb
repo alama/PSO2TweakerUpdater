@@ -2,6 +2,7 @@
 Imports System.IO
 Imports System.Net
 Imports System.Threading
+Imports Microsoft.Win32
 
 Public Class MainForm
     Private FreedomURL As String = Nothing
@@ -11,7 +12,13 @@ Public Class MainForm
     End Sub
 
     Private Sub client_DownloadStringCompleted(sender As Object, e As DownloadStringCompletedEventArgs) Handles Client.DownloadStringCompleted
-        FreedomURL = If(e.Result.Contains("freedom"), e.Result, "http://162.243.211.123/freedom/")
+        Dim TestURL As String = ""
+        If RegKey.GetValue(Of Boolean)(RegKey.EnableBeta) = True Then
+            TestURL = Client.DownloadString("http://aida.moe/freedom/")
+        Else
+            TestURL = e.Result
+        End If
+        FreedomURL = If(TestURL.Contains("freedom"), TestURL, e.Result)
         Client.DownloadFileAsync(New Uri(FreedomURL & "PSO2%20Tweaker.exe"), (Application.StartupPath & "\PSO2 Tweaker.exe"))
     End Sub
 
@@ -35,5 +42,38 @@ Public Class MainForm
 
         File.Delete("PSO2 Tweaker.exe")
         Me.Invoke(New Action(Of Uri)(AddressOf Client.DownloadStringAsync), New Uri("http://arks-layer.com/freedom.txt"))
+    End Sub
+End Class
+
+Public Class RegKey
+    Public Const EnableBeta = "EnableBeta"
+
+    Private Shared ReadOnly RegistryCache As Dictionary(Of String, Object) = New Dictionary(Of String, Object)
+    Private Shared ReadOnly RegistrySubKey As RegistryKey = Registry.CurrentUser.OpenSubKey("Software\AIDA", True)
+
+    Public Shared Function GetValue(Of T)(key As String) As T
+        Try
+            Dim returnValue As Object = Nothing
+            If RegistryCache.TryGetValue(key, returnValue) Then Return DirectCast(Convert.ChangeType(returnValue, GetType(T)), T)
+
+            returnValue = RegistrySubKey.GetValue(key, Nothing)
+            If returnValue IsNot Nothing Then RegistryCache.Add(key, returnValue)
+
+            Return DirectCast(Convert.ChangeType(returnValue, GetType(T)), T)
+        Catch
+            Return Nothing
+        End Try
+    End Function
+
+    Public Shared Sub SetValue(Of T)(key As String, value As T)
+        My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\AIDA", key, value)
+        RegistryCache(key) = value
+    End Sub
+
+    Public Shared Sub DeleteValue(key As String)
+        'This is a dumb way to do this. [AIDA]
+        Dim keytodelete = My.Computer.Registry.CurrentUser.OpenSubKey("Software\AIDA", True)
+        keytodelete.DeleteValue(key)
+        keytodelete.Close()
     End Sub
 End Class
