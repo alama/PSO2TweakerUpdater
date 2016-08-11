@@ -4,6 +4,12 @@ configuration:
 - Release
 - Debug
 
+cache:
+- packages -> **\WindowsApplication2\packages.config
+
+before_build:
+- cmd: nuget restore "PSO2 Tweaker Updater.sln"
+
 after_build:
 - cmd: git rev-parse --short %APPVEYOR_REPO_COMMIT%>%TMP%\gitshort.txt
 - cmd: set /P GITSHORT=<%TMP%\gitshort.txt
